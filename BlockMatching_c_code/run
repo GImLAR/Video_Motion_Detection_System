@@ -1,0 +1,17 @@
+#!/bin/csh
+
+if ($#argv != 1) then
+   echo "Usage: run optimize|analysis"
+   exit
+endif
+
+touch *.c
+make $argv[1]
+
+foreach video ('sales')
+ (/usr/bin/time winup $video)>& data_$argv[1]_winup_$video
+ (/usr/bin/time winup_tss $video)>& data_$argv[1]_winup_tss_$video
+ (/usr/bin/time bsp $video)>& data_$argv[1]_bsp_$video
+ (/usr/bin/time tss $video)>& data_$argv[1]_tss_$video
+ (/usr/bin/time fsa $video)>& data_$argv[1]_fsa_$video
+end

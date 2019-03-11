@@ -1,0 +1,35 @@
+This directory contains the C source codes for several block matching
+algorithms. Below is the list of them together with brief descriptions.
+
+Common subroutines:
+   cvutil.c        subroutines for image memory allocation and stop watch
+   imageio.c       subroutine for writing .ppm image file
+   main.c          main program for each block matching algorithm
+   multilevel.c    subroutine for multi-level images construction for BSP 
+   		     and winner-update algorithms
+
+Block matching algorithms:
+   fsa.c           Full Search (FS) algorithm
+   bsp.c           Block Sum Pyramid (BSP) algorithm
+   winup.c         Winner-Update (WinUpMI) algorithm
+   tss.c           Three-Step Search (TSS) algorithm
+   winup_tss.c     Winner-Update + Three-Step Search (WinUpTSS) algorithm
+
+
+These programs are developed on Sun Ultra-1 workstation using gcc compiler.
+There is a Makefile in this directory for compiling the programs.
+Use "make optimize" to produce optimized programs for which the execution
+time can be measured. Use "make analysis" to produce the programs that can 
+produce the predicted images and analyze the number of operations and PSNRs.
+
+Please make sure that the generated machine code is optimized by supplying
+"-O2" as the argument for compiler.
+
+There is also a "run" shell script which can be used for compiling the
+programs and comparing their performance automatically. The legal usages are
+"run optimize" and "run analysis".
+
+Notice that only the first TEN images of the Salesman sequence are provided
+for testing.
+
+Bugs, problems and comments should be sent to: yschen@cs.nctu.edu.tw

@@ -1,0 +1,11 @@
+source video_sequence/sales/
+destination video_sequence/output/
+sequence salesy
+output ssy
+from 1
+to 10
+type 1
+width 352
+height 288
+block 16
+range 16
