@@ -1,3 +1,6 @@
+%VAZNO!!!!!!!: Pre pokretanja namestiti putanju fajla u kojem se
+%nalazi matlab kod(gore iznad npr. C:\Users\Stankovic\Desktop\Video_Motion_Detection_System\BlockMatching_matlab)
+ 
 % This script uses all the Motion Estimation algorithms written for the
 % final project and save their results.
 % The algorithms being used are Exhaustive Search, Three Step Search, New
@@ -26,15 +29,15 @@ for i = 0:30
     imgPNumber = i+2;
 
     if imgINumber < 10
-        imgIFile = sprintf('%s00%d.ras', imageName, imgINumber);
+        imgIFile = sprintf('gray\\%s00%d.ras', imageName, imgINumber);
     elseif imgINumber < 100
-        imgIFile = sprintf('%s0%d.ras', imageName, imgINumber);
+        imgIFile = sprintf('gray\\%s0%d.ras', imageName, imgINumber);
     end
 
     if imgPNumber < 10
-        imgPFile = sprintf('%s00%d.ras', imageName, imgPNumber);
+        imgPFile = sprintf('gray\\%s00%d.ras', imageName, imgPNumber);
     elseif imgPNumber < 100
-        imgPFile = sprintf('%s0%d.ras', imageName, imgPNumber);
+        imgPFile = sprintf('gray\\%s0%d.ras', imageName, imgPNumber);
     end
 
     imgI = double(imread(imgIFile));
@@ -88,7 +91,58 @@ for i = 0:30
 end
 
 
-
 save dsplots2 DSpsnr DScomputations ESpsnr EScomputations TSSpsnr ...
       TSScomputations SS4psnr SS4computations NTSSpsnr NTSScomputations ...
        SESTSSpsnr SESTSScomputations ARPSpsnr ARPScomputations
+   
+%--------------------------------------------------------------
+%Dodato
+x=1:31;%broj frejmova
+hold all;
+plot (x,TSSpsnr);
+plot (x,ARPSpsnr, 'r'); 
+plot (x,DSpsnr, 'k'); 
+plot (x, ESpsnr, 'm');
+plot (x, NTSSpsnr, 'c');
+plot (x, SESTSSpsnr, 'b');
+plot (x, SS4psnr, 'g');
+title('Block size 16x16, search parameter p=7');
+xlabel('Frame Number');
+ylabel('PSNR');
+legend ('TSS', 'ARPS', 'DS','ES', 'NTSS', 'SESTSS', 'SS4');
+hold off;
+
+figure;
+hold all;
+plot (x,TSScomputations); 
+plot (x,ARPScomputations, 'r'); 
+plot (x,DScomputations, 'k'); 
+plot (x,EScomputations, 'm');
+plot (x, NTSScomputations, 'c');
+plot (x, SESTSScomputations, 'y');
+plot (x, SS4computations, 'g');
+legend ('Three Time Search',...
+        'Adaptive Rood Pattern Search',...
+        'Diamond Search',...
+        'Exhaustive  Search',...
+        'New  Three  Step  Search', ...
+        'Simple  and  Efficient  TSS',...
+        'Four  Step  Search ');
+    
+title('Block size 16x16, search parameter p=7');
+xlabel('Frame Number');
+ylabel('Search Points Per Macro Block');
+hold off;
+figure;
+
+hold all;
+plot (x,TSScomputations); 
+plot (x,ARPScomputations, 'r'); 
+plot (x,DScomputations, 'k'); 
+plot (x, NTSScomputations, 'c');
+plot (x, SESTSScomputations, 'y');
+plot (x, SS4computations, 'g');
+title('Block size 16x16, search parameter p=7 (without ES)');
+xlabel('Frame Number');
+ylabel('Search Points Per Macro Block');
+legend ('TSS', 'ARPS', 'DS', 'NTSS', 'SESTSS', 'SS4');
